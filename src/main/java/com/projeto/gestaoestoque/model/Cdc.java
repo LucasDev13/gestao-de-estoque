@@ -24,6 +24,7 @@ public class Cdc implements Serializable {
 	private String nomeCdc;
 	private String andar;
 	private String bloco;
+	private int leito;
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate dataCadastro;
 	private LocalTime horaCadastro;
@@ -63,6 +64,14 @@ public class Cdc implements Serializable {
 
 	public void setBloco(String bloco) {
 		this.bloco = bloco;
+	}
+	
+	public int getLeito() {
+		return leito;
+	}
+	
+	public void setLeito(int leito) {
+		this.leito = leito;
 	}
 
 	public LocalDate getDataCadastro() {

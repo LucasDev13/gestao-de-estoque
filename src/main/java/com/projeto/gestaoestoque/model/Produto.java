@@ -21,9 +21,10 @@ public class Produto implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long codProduto;
+	private Long codProduto; //vai identificar o produto
 	private String nomeProduto;
 	private String descProduto;
+	private LocalDate dataValidade;
 	private int loteProduto;
 	private String unidadeMedida;
 	private BigDecimal precoProduto;
@@ -33,8 +34,6 @@ public class Produto implements Serializable {
 	private LocalTime horaCadastro;
 
 	public Produto() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Long getCodProduto() {
@@ -60,7 +59,15 @@ public class Produto implements Serializable {
 	public void setDescProduto(String descProduto) {
 		this.descProduto = descProduto;
 	}
-
+	
+	public LocalDate getDataValidade() {
+		return dataValidade;
+	}
+	
+	public void setDataValidade(LocalDate dataValidade) {
+		this.dataValidade = dataValidade;
+	}
+	
 	public int getLoteProduto() {
 		return loteProduto;
 	}

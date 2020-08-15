@@ -22,16 +22,14 @@ public class Saida implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long codSaida;
 	private Cdc nomeCdc;
+	private Estoque nomeEstoque;//para realizar transferencias para outros estoques
 	private Produto produto;// vai poder obter todos os atributos
 	private int quantSaidaProduto;
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate dataSaida;
 	private LocalTime horaSaida;
 
-	public Saida() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	public Saida() {}
 
 	public Long getCodSaida() {
 		return codSaida;
@@ -47,6 +45,14 @@ public class Saida implements Serializable {
 
 	public void setNomeCdc(Cdc nomeCdc) {
 		this.nomeCdc = nomeCdc;
+	}
+	
+	public Estoque getNomeEstoque() {
+		return nomeEstoque;
+	}
+	
+	public void setNomeEstoque(Estoque nomeEstoque) {
+		this.nomeEstoque = nomeEstoque;
 	}
 
 	public Produto getProduto() {

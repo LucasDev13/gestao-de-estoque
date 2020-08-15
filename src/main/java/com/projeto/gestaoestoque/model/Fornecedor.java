@@ -3,6 +3,8 @@ package com.projeto.gestaoestoque.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,9 +33,19 @@ public class Fornecedor implements Serializable {
 	private LocalDate dataCadastro;
 	private LocalTime horaCadastro;
 
+	// Associação de tem-varios de fornecedor com produto
+	// avaliar se vai ser instaciado o Arraylist<>()
+	private List<Produto> produto = new ArrayList<>();
+
+	// Associação tem um entre fornecedor e endereco
+	private Endereco endereco;
+
 	public Fornecedor() {
-		super();
-		// TODO Auto-generated constructor stub
+	}
+
+	public Fornecedor(String nomeRazaoSocialFornecedor, Endereco endereco) {
+		this.nomeRazaoSocialFornecedor = nomeRazaoSocialFornecedor;
+		this.endereco = endereco;
 	}
 
 	public Long getCodFornecedor() {
@@ -106,6 +118,35 @@ public class Fornecedor implements Serializable {
 
 	public void setHoraCadastro(LocalTime horaCadastro) {
 		this.horaCadastro = horaCadastro;
+	}
+
+	public List<Produto> getProduto() {
+		return produto;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public void addProdutoLista(Produto produto) {
+		this.produto.add(produto);	
+	}
+	
+	public void removeProdutoLista(Produto produto) {
+		this.produto.remove(produto);
+	}
+	
+//	public List<Produto> pesquisaProduto(){
+//		
+//	}
+
+	@Override
+	public String toString() {
+		return "Fornecedor: " + nomeRazaoSocialFornecedor + ", " + endereco + "]";
 	}
 
 }

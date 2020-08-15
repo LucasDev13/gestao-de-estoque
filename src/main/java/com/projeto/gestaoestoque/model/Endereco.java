@@ -17,10 +17,16 @@ public class Endereco implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String codEndereco;
-	private String logradouro;
-	private String uf;
+	private String logradouro;//rua
+	private String uf;//estado
 	private String cep;
 	private String cidade;
+	
+	public Endereco() {}
+	
+	public Endereco(String logradouro){
+		this.logradouro = logradouro;
+	}
 
 	public String getCodEndereco() {
 		return codEndereco;
@@ -60,6 +66,11 @@ public class Endereco implements Serializable {
 
 	public void setCidade(String cidade) {
 		this.cidade = cidade;
+	}
+
+	@Override
+	public String toString() {
+		return "Endereco: " + logradouro;
 	}
 
 }

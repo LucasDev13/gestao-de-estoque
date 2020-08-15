@@ -3,6 +3,8 @@ package com.projeto.gestaoestoque.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,12 +17,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table(name = "tb_estoque")
 public class Estoque implements Serializable {
+	
+	//Com a prática, você pode criar indicadores para fazer reposição e/ou a redução de produtos armazenados para evitar ficar com itens parados no armazém ou em falta.
+	//é possível fazer a reposição de elementos de maneira antecipada.
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long codEstoque;
+	private String nomeEstoque;
 	private int quantidadeMinima;
 	private int quantidadeMaxima;
 	private int quantSaldoEstoque;
@@ -31,10 +37,35 @@ public class Estoque implements Serializable {
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate dataEntrada;
 	private LocalTime horaEntrada;
+	
+	//Associação tem-varios de entrada com estoque.
+	private List<Entrada> entradas = new ArrayList<>();
 
 	public Estoque() {
-		super();
-		// TODO Auto-generated constructor stub
+	}
+	
+	public Estoque(Long codEstoque, String nomeEstoque, int quantidadeMinima, int quantidadeMaxima, LocalDate dataEntrada, LocalDate dataSaida) {
+		this.codEstoque = codEstoque;
+		this.nomeEstoque = nomeEstoque;
+		this.quantidadeMinima = quantidadeMinima;
+		this.quantidadeMaxima = quantidadeMaxima;
+		this.dataEntrada = dataEntrada;
+		this.dataSaida = dataSaida;
+	}
+	
+	public Estoque(Long codEstoque, String nomeEstoque, int quantidadeMinima, int quantidadeMaxima,
+			int quantSaldoEstoque, int quantidade, LocalDate dataSaida, LocalTime horaSaida, LocalDate dataEntrada,
+			LocalTime horaEntrada) {
+		this.codEstoque = codEstoque;
+		this.nomeEstoque = nomeEstoque;
+		this.quantidadeMinima = quantidadeMinima;
+		this.quantidadeMaxima = quantidadeMaxima;
+		this.quantSaldoEstoque = quantSaldoEstoque;
+		this.quantidade = quantidade;
+		this.dataSaida = dataSaida;
+		this.horaSaida = horaSaida;
+		this.dataEntrada = dataEntrada;
+		this.horaEntrada = horaEntrada;
 	}
 
 	public Long getCodEstoque() {
@@ -43,6 +74,14 @@ public class Estoque implements Serializable {
 
 	public void setCodEstoque(Long codEstoque) {
 		this.codEstoque = codEstoque;
+	}
+	
+	public String getNomeEstoque() {
+		return nomeEstoque;
+	}
+	
+	public void setNomeEstoque(String nomeEstoque) {
+		this.nomeEstoque = nomeEstoque;
 	}
 
 	public int getQuantidadeMinima() {
@@ -107,6 +146,14 @@ public class Estoque implements Serializable {
 
 	public void setHoraEntrada(LocalTime horaEntrada) {
 		this.horaEntrada = horaEntrada;
+	}
+	
+	public List<Entrada> getEntradas() {
+		return entradas;
+	}
+	
+	public void addEstoque(List<Entrada> entradas) {
+		this.entradas = entradas;
 	}
 
 }
