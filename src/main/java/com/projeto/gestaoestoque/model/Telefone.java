@@ -6,29 +6,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_endereco")
-public class Endereco implements Serializable {
+@Table(name = "tb_telefone")
+public class Telefone implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
-	private String logradouro;//rua
-	private String uf;//estado
-	private String cep;
-	private String cidade;
-	
-	public Endereco() {}
-	
-	public Endereco(String logradouro, String uf, String cep, String cidade){
-		this.logradouro = logradouro;
-		this.uf = uf;
-		this.cep = cep;
-		this.cidade = cidade;
+	private String tipo;
+	private int numero;
+
+	@ManyToOne
+	private Fornecedor fornecedor;
+
+	public Telefone() {
+
+	}
+
+	public Telefone(String tipo, int numero) {
+		this.tipo = tipo;
+		this.numero = numero;
 	}
 
 	public Long getId() {
@@ -39,36 +41,28 @@ public class Endereco implements Serializable {
 		this.id = id;
 	}
 
-	public String getLogradouro() {
-		return logradouro;
+	public String getTipo() {
+		return tipo;
 	}
 
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
 
-	public String getUf() {
-		return uf;
+	public int getNumero() {
+		return numero;
 	}
 
-	public void setUf(String uf) {
-		this.uf = uf;
+	public void setNumero(int numero) {
+		this.numero = numero;
 	}
 
-	public String getCep() {
-		return cep;
+	public Fornecedor getFornecedor() {
+		return fornecedor;
 	}
 
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
 	}
 
 	@Override
@@ -87,7 +81,7 @@ public class Endereco implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Endereco other = (Endereco) obj;
+		Telefone other = (Telefone) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -95,7 +89,5 @@ public class Endereco implements Serializable {
 			return false;
 		return true;
 	}
-
-	
 
 }

@@ -1,14 +1,15 @@
 package com.projeto.gestaoestoque.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,28 +21,46 @@ public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long codProduto; //vai identificar o produto
+	@GeneratedValue(strategy = GenerationType.AUTO) // faz ser autoincremento
+	private Long id; // vai identificar o produto
 	private String nomeProduto;
 	private String descProduto;
 	private LocalDate dataValidade;
 	private int loteProduto;
 	private String unidadeMedida;
-	private BigDecimal precoProduto;
-	private Estoque estoque;// Quantidade do saldo no estoque
+	private double precoProduto;
+	private int quantidadeProduto;// se refere a quantidade de produtos que estam entrando o saindo do estoque..
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-	private LocalDate dataCadastro;
+	private LocalDateTime dataCadastro;
 	private LocalTime horaCadastro;
+
+	// associaçoes
+	@ManyToOne
+	private Estoque estoque;// Quantidade do saldo no estoque
+	@ManyToOne
+	private Fornecedor fornecedor;
+	
+	@ManyToOne
+	private Movimentacao movimentacao;
 
 	public Produto() {
 	}
 
-	public Long getCodProduto() {
-		return codProduto;
+	public Produto(String nomeProduto, int loteProduto, double precoProduto, int quantidadeProduto) {
+		this.nomeProduto = nomeProduto;
+		this.loteProduto = loteProduto;
+		this.precoProduto = precoProduto;
+		this.quantidadeProduto = quantidadeProduto;
+		this.dataCadastro = LocalDateTime.now();
+
 	}
 
-	public void setCodProduto(Long codProduto) {
-		this.codProduto = codProduto;
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNomeProduto() {
@@ -59,15 +78,15 @@ public class Produto implements Serializable {
 	public void setDescProduto(String descProduto) {
 		this.descProduto = descProduto;
 	}
-	
+
 	public LocalDate getDataValidade() {
 		return dataValidade;
 	}
-	
+
 	public void setDataValidade(LocalDate dataValidade) {
 		this.dataValidade = dataValidade;
 	}
-	
+
 	public int getLoteProduto() {
 		return loteProduto;
 	}
@@ -84,27 +103,27 @@ public class Produto implements Serializable {
 		this.unidadeMedida = unidadeMedida;
 	}
 
-	public BigDecimal getPrecoProduto() {
+	public double getPrecoProduto() {
 		return precoProduto;
 	}
 
-	public void setPrecoProduto(BigDecimal precoProduto) {
+	public void setPrecoProduto(double precoProduto) {
 		this.precoProduto = precoProduto;
 	}
 
-	public Estoque getEstoque() {
-		return estoque;
+	public void setQuantidadeProduto(int quantidadeProduto) {
+		this.quantidadeProduto = quantidadeProduto;
 	}
 
-	public void setEstoque(Estoque estoque) {
-		this.estoque = estoque;
+	public int getQuantidadeProduto() {
+		return quantidadeProduto;
 	}
 
-	public LocalDate getDataCadastro() {
+	public LocalDateTime getDataCadastro() {
 		return dataCadastro;
 	}
 
-	public void setDataCadastro(LocalDate dataCadastro) {
+	public void setDataCadastro(LocalDateTime dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
@@ -116,11 +135,32 @@ public class Produto implements Serializable {
 		this.horaCadastro = horaCadastro;
 	}
 
+	public Estoque getEstoque() {
+		return estoque;
+	}
+	
+	public Movimentacao getMovimentacao() {
+		return movimentacao;
+	}
+	
+	public void setMovimentacao(Movimentacao movimentacao) {
+		this.movimentacao = movimentacao;
+	}
+	
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+	
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((codProduto == null) ? 0 : codProduto.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -133,14 +173,14 @@ public class Produto implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Produto other = (Produto) obj;
-		if (codProduto == null) {
-			if (other.codProduto != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!codProduto.equals(other.codProduto))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
-	
+
 	
 
 }

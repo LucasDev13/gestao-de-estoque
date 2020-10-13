@@ -13,41 +13,47 @@ import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "tb_cdc")
-public class Cdc implements Serializable {
+@Table(name = "tb_setor")
+public class Setor implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long codCdc;
-	private String nomeCdc;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String nomeSetor;
 	private String andar;
 	private String bloco;
 	private int leito;
 	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private LocalDate dataCadastro;
 	private LocalTime horaCadastro;
+	
+	public Setor() {}
 
-	public Cdc() {
-		super();
-		// TODO Auto-generated constructor stub
+	public Setor(String nomeSetor, String andar, String bloco, int leito) {
+		this.nomeSetor = nomeSetor;
+		this.andar = andar;
+		this.bloco = bloco;
+		this.leito = leito;
+		this.dataCadastro = LocalDate.now();
+		this.horaCadastro = LocalTime.now();
+	}
+	
+	public Long getId() {
+		return id;
 	}
 
-	public Long getCodCdc() {
-		return codCdc;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public void setCodCdc(Long codCdc) {
-		this.codCdc = codCdc;
+	public String getNomeSetor() {
+		return nomeSetor;
 	}
 
-	public String getNomeCdc() {
-		return nomeCdc;
-	}
-
-	public void setNomeCdc(String nomeCdc) {
-		this.nomeCdc = nomeCdc;
+	public void setNomeSetor(String nomeSetor) {
+		this.nomeSetor = nomeSetor;
 	}
 
 	public String getAndar() {
@@ -65,11 +71,11 @@ public class Cdc implements Serializable {
 	public void setBloco(String bloco) {
 		this.bloco = bloco;
 	}
-	
+
 	public int getLeito() {
 		return leito;
 	}
-	
+
 	public void setLeito(int leito) {
 		this.leito = leito;
 	}
@@ -89,5 +95,32 @@ public class Cdc implements Serializable {
 	public void setHoraCadastro(LocalTime horaCadastro) {
 		this.horaCadastro = horaCadastro;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Setor other = (Setor) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+	
+	
 
 }
