@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Built-By: lucasdev
+Build-Jdk: 15
+Implementation-Title: gestao-estoque
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.example.projeto
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
+ -starter-parent/gestao-estoque
+Created-By: Maven Integration for Eclipse
+
