@@ -1,7 +1,6 @@
 package com.projeto.gestaoestoque;
 
-//import com.projeto.gestaoestoque.model.Entrada;
-//import com.projeto.gestaoestoque.model.Produto;
+import java.io.IOException;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,12 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class GestaoEstoqueApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		
 		SpringApplication.run(GestaoEstoqueApplication.class, args);
-		
-//		Entrada entrada = new Entrada();
-//		Produto produto = new Produto();
 
 	}
 

@@ -20,7 +20,7 @@ public class ProdutoService {
 		return list;
 	}
 	
-	public void saveProduct(Produto product) {
-		prodRepository.save(product);
+	public Produto saveProduct(Produto product) {
+		return prodRepository.save(product);
 	}
 }

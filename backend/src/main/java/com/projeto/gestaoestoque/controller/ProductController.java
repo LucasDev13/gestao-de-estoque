@@ -34,8 +34,8 @@ public class ProductController {
 	}
 	
 	@PostMapping("/save")
-	public void saveEntrada(@RequestBody Produto product) {
-		System.out.println(product);
-		productService.saveProduct(product);
+	public ResponseEntity<Produto> saveEntrada(@RequestBody Produto product) {
+		Produto p = productService.saveProduct(product);
+		return ResponseEntity.ok().body(p);
 	}
 }
